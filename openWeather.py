@@ -16,7 +16,7 @@ class MainDialog(QDialog,openWeatherGUI.Ui_Dialog):
 		cityList=cities.readlines()
 		cities.close()
 		self.cbCities.insertItems(0,sorted(cityList))
-		self.owm = pyowm.OWM('7585221fbcead099c4e4c4bb6fd3b68f')  
+		self.owm = pyowm.OWM('Mettre ici votre API key openweathermap')  
 
 	def goToWikiRefroidissementEolien(self):
 		self.lblTempRessLink.setOpenExternalLinks(True)
