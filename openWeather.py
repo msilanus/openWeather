@@ -5,7 +5,7 @@ import math
 import sys 
 from PyQt4.QtGui import *
 import openWeatherGUI
-#testBonjourGUI est le fichier .py genere par pyuic4
+#openWeatherGUI est le fichier .py genere par pyuic4
 
 class MainDialog(QDialog,openWeatherGUI.Ui_Dialog):
 	def __init__(self,parent=None):
