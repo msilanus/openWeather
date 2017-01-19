@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import urllib2
 import pyowm
 import math
 import sys 
@@ -11,12 +12,21 @@ class MainDialog(QDialog,openWeatherGUI.Ui_Dialog):
 	def __init__(self,parent=None):
 		super(MainDialog,self).__init__(parent)
 		self.setupUi(self)
-		#self.cbCities.insertItem(0,"aaa")
+		
+		# Si connexion derriere un proxy : decommenter les lignes suivantes
+		# Modifier user:password@proxy:port en fonction de votre situation
+		#
+		#proxy = urllib2.ProxyHandler({'http': 'http://user:password@proxy:port'})
+		#auth = urllib2.HTTPBasicAuthHandler()
+		#opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
+		#urllib2.install_opener(opener)
+		#
+		
 		cities=open('cities.txt','r')
 		cityList=cities.readlines()
 		cities.close()
 		self.cbCities.insertItems(0,sorted(cityList))
-		self.owm = pyowm.OWM('Mettre ici votre API key openweathermap')  
+		self.owm = pyowm.OWM('Votre openWeatherMap API key ici')  
 
 	def goToWikiRefroidissementEolien(self):
 		self.lblTempRessLink.setOpenExternalLinks(True)
@@ -38,9 +48,7 @@ class MainDialog(QDialog,openWeatherGUI.Ui_Dialog):
 		cloud=w.get_clouds()
 		rain=w.get_rain().get('3h')
 		snow=w.get_snow().get('3h')
-		humidex=w.get_humidex()
-		heatIndex=w.get_heat_index()
-		
+				
 		self.lblLocalisation.setText(str(self.cbCities.currentText()).translate(None,'\n')+" - "+now)
 		self.lblVent.setText(str(windS)+" km/h")
 		self.lblDir.setText(str(windD)+u" °")
